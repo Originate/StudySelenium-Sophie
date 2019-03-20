@@ -6,14 +6,8 @@ from pages import login_page
 class TestLogin():
 
     @pytest.fixture
-    def login(self, request):
-        _driver = webdriver.Chrome()
-
-        def quit():
-            _driver.quit()
-
-        request.addfinalizer(quit)
-        return login_page.LoginPage(_driver)
+    def login(self, driver):
+        return login_page.LoginPage(driver)
 
     def test_valid_credentials(self, login):
         login.with_("tomsmith", "SuperSecretPassword!")
